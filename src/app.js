@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <div className="header-container">
-        <div classname="header">
+        <div className="header">
           <h1>Suisse Agricultural Organizations in the Web</h1>
         </div>
         <div className="descriptionheader1">
