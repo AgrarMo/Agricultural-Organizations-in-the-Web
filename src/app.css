@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    background-color: rgb(0, 43, 70);
+}
+.app {
+    background-color: rgb(0, 0, 0);
+    font-family:"Roboto";
+    border-radius: 15px;
+    padding:1em;
+}
+
+h1{
+    font-family: "Roboto";
+        margin-bottom: 20px;
+        color: rgb(255, 255, 255);
+}
+
+.my-sigma canvas:nth-of-type(1) {
+    /* Bottom canvas gets the background color */
+    background-color: rgb(0, 43, 70) !important;
+    z-index: 0;
+  }
+
+.graph-container{
+    height: 700px;
+    background-color: rgb(0, 43, 70);
+    margin: 0 auto;
+    border-radius: 15px;
+    padding:1em;
+}
+
+.node.highlighted {
+    stroke: #ff0000;
+    stroke-width: 2px;
+  }
+
+.description1, .description2, .description3{
+    background-color: rgb(0, 43, 70);
+    font-family: "Roboto";
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 1em;
+    box-sizing: border-box;
+    flex: 1 1 30%; /* Flex-grow, flex-shrink, flex-basis */
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .description1, .description2, .description3 {
+      flex: 1 1 100%; /* Stack on top of each other on narrow screens */
+    }
+  }
+
+.info-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
