@@ -48,17 +48,20 @@ export const LoadGraph = ({ filterRelevant }) => {
         graph.forEachNode(node => {
           const status = graph.getNodeAttribute(node, "status");
           const color = status.includes("Relevant") ? "rgb(9, 255, 0)" : "rgba(218, 129, 129, 0.56)";
-          const borderColor = status.includes("Relevant") ? "rgb(255, 0, 0)" : "rgb(255, 0, 0)";
+
 
           graph.setNodeAttribute(node, "color", color);
-          graph.setNodeAttribute(node, "borderColor", borderColor);
+          graph.setNodeAttribute(node, "originalColor", color); // Store original color
+
 
         });
 
         // Set edge sizes and colors
         graph.forEachEdge(edge => {
+          const defaultEdgeColor = "rgba(4, 35, 60, 0.5)";
           graph.setEdgeAttribute(edge, "size", 0.1);
-          graph.setEdgeAttribute(edge, "color", "rgba(4, 35, 60, 0.5)");
+          graph.setEdgeAttribute(edge, "color", defaultEdgeColor);
+          graph.setEdgeAttribute(edge, "originalColor", defaultEdgeColor); // Store original edge color
         });
 
         // Assign random initial positions with a rectangular spread
@@ -119,13 +122,55 @@ const GraphControls = ({
     [sigma]
   );
 
-  // const onFocus = useCallback(
-  //   (value) => {
-  //     if (value === null) setFocusNode(null);
-  //     else if (value.type === "nodes") setFocusNode(value.id);
-  //   },
-  //   [setFocusNode]
-  // );
+  // Node *hover* highlighting
+  useEffect(() => {
+    const handleMouseEnter = (event) => {
+      const hoveredNode = event.node;
+
+      // Highlight hovered node
+      graph.setNodeAttribute(hoveredNode, "highlighted", true);
+
+      // Hide all non-neighbor nodes by coloring them background
+      const neighbors = graph.neighbors(hoveredNode);
+      graph.forEachNode(node => {
+        if (node !== hoveredNode && !neighbors.includes(node)) {
+          graph.setNodeAttribute(node, "color", "rgb(0, 43, 70)");
+        }
+      });
+
+      // Turn connecting edges white, others background
+      graph.forEachEdge(edge => {
+        const [source, target] = graph.extremities(edge);
+        if (
+          (source === hoveredNode && neighbors.includes(target)) ||
+          (target === hoveredNode && neighbors.includes(source))
+        ) {
+          graph.setEdgeAttribute(edge, "color", "#ffffff");
+        } else {
+          graph.setEdgeAttribute(edge, "color", "rgb(0, 43, 70)");
+        }
+      });
+      };
+
+      const handleMouseLeave = () => {
+      // Restore original colors
+      graph.forEachNode(node => {
+        const original = graph.getNodeAttribute(node, "originalColor");
+        graph.setNodeAttribute(node, "color", original);
+      });
+      graph.forEachEdge(edge => {
+        const original = graph.getEdgeAttribute(edge, "originalColor");
+        graph.setEdgeAttribute(edge, "color", original);
+      });
+      };
+
+      sigma.on("enterNode", handleMouseEnter);
+      sigma.on("leaveNode", handleMouseLeave);
+      return () => {
+      sigma.off("enterNode", handleMouseEnter);
+      sigma.off("leaveNode", handleMouseLeave);
+    };
+  }, [sigma, graph]);
 
   const onChange = useCallback(
     (value) => {
