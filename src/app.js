@@ -5,13 +5,17 @@ import './app.css';
 function App() {
   return (
     <div className="App">
-
+      <div className="info-container">
+        <div classname="description1">
           <h1>Suisse Agricultural Organizations in the Web</h1>
-
+        </div>
+        <div classname="description2">
+        <p> This plot displays 1.734 agricultural websites (green), their interlinkages, and their interlinkages with websites of non-agricultural organizations (pink). Explore this webscape to get an bubble-indipendent impression of the versatility of suisse agriculture. The crawler is still running and data regularly updated.  </p>
+        </div>
+      </div> 
       <div className="graph-container">
         <DisplayGraph />
       </div>  
-
       <div className="info-container">
         <div className="description1">
           <p>
@@ -52,7 +56,7 @@ function App() {
             This website was created by me, Moritz Maurer,
              a suisse based agricultural sociologist. 
              The data and the graph are for illustrative purposes only
-              and may not be accurate or up-to-date. Use the information at your own risk.
+              and may not be accurate. Use the information at your own risk.
           </p>
         </div>
       </div>
