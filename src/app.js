@@ -9,7 +9,7 @@ function App() {
         <div classname="header">
           <h1>Suisse Agricultural Organizations in the Web</h1>
         </div>
-        <div classname="descriptionheader1">
+        <div className="descriptionheader1">
         <p> This plot displays 1.734 agricultural websites (green), their interlinkages, and their interlinkages with websites of non-agricultural organizations (pink). Explore this webscape to get an bubble-indipendent impression of the versatility of suisse agriculture. The crawler is still running and data regularly updated.  </p>
         </div>
       </div> 
