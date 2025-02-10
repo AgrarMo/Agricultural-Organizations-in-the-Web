@@ -130,16 +130,16 @@ const GraphControls = ({
       // Highlight hovered node
       graph.setNodeAttribute(hoveredNode, "highlighted", true);
 
-      // Hide all non-neighbor nodes by coloring them background
+      // Hide all non-neighbor nodes
       const neighbors = graph.neighbors(hoveredNode);
-      graph.forEachNode(node => {
+      graph.forEachNode((node) => {
         if (node !== hoveredNode && !neighbors.includes(node)) {
-          graph.setNodeAttribute(node, "color", "rgb(0, 43, 70)");
+          graph.setNodeAttribute(node, "color", "rgb(0, 43, 70)"); // Background color
         }
       });
 
-      // Turn connecting edges white, others background
-      graph.forEachEdge(edge => {
+      // Highlight edges that connect to hovered node; hide others
+      graph.forEachEdge((edge) => {
         const [source, target] = graph.extremities(edge);
         if (
           (source === hoveredNode && neighbors.includes(target)) ||
@@ -150,28 +150,31 @@ const GraphControls = ({
           graph.setEdgeAttribute(edge, "color", "rgb(0, 43, 70)");
         }
       });
-      };
+    };
 
-      const handleMouseLeave = () => {
-      // Restore original colors
-      graph.forEachNode(node => {
-        const original = graph.getNodeAttribute(node, "originalColor");
-        graph.setNodeAttribute(node, "color", original);
+    const handleMouseLeave = (event) => {
+      // Clear highlight on every node and restore original color
+      graph.forEachNode((node) => {
+        graph.setNodeAttribute(node, "highlighted", false);
+        const originalColor = graph.getNodeAttribute(node, "originalColor");
+        graph.setNodeAttribute(node, "color", originalColor);
       });
-      graph.forEachEdge(edge => {
-        const original = graph.getEdgeAttribute(edge, "originalColor");
-        graph.setEdgeAttribute(edge, "color", original);
+      // Clear highlight on every edge and restore its original color
+      graph.forEachEdge((edge) => {
+        const originalColor = graph.getEdgeAttribute(edge, "originalColor");
+        graph.setEdgeAttribute(edge, "color", originalColor);
       });
-      };
-
-      sigma.on("enterNode", handleMouseEnter);
-      sigma.on("leaveNode", handleMouseLeave);
-      return () => {
+    };
+  
+    sigma.on("enterNode", handleMouseEnter);
+    sigma.on("leaveNode", handleMouseLeave);
+  
+    return () => {
       sigma.off("enterNode", handleMouseEnter);
       sigma.off("leaveNode", handleMouseLeave);
     };
   }, [sigma, graph]);
-
+  
   const onChange = useCallback(
     (value) => {
       // Un-highlight any previously highlighted node
