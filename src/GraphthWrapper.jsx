@@ -134,7 +134,7 @@ const GraphControls = ({
       const neighbors = graph.neighbors(hoveredNode);
       graph.forEachNode((node) => {
         if (node !== hoveredNode && !neighbors.includes(node)) {
-          graph.setNodeAttribute(node, "color", "#00ffffff"); // Background color
+          graph.setNodeAttribute(node, "color", "rgba(0,43,70,0.5)"); // Background color
         }
       });
 
@@ -147,7 +147,7 @@ const GraphControls = ({
         ) {
           graph.setEdgeAttribute(edge, "color", "#ffffff");
         } else {
-          graph.setEdgeAttribute(edge, "color", "#00ffffff");
+          graph.setEdgeAttribute(edge, "color", "rgba(0,43,70,0.5)");
         }
       });
     };
