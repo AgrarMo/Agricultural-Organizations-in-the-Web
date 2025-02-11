@@ -10,7 +10,8 @@ function App() {
           <h1>Suisse Agricultural Organizations in the Web</h1>
         </div>
         <div className="descriptionheader1">
-        <p> This plot displays 1.734 suisse agricultural websites (green), their interlinkages, and their interlinkages with websites of non-agricultural organizations (pink). Explore this webscape to get an bubble-indipendent impression of the versatility of suisse agriculture. The crawler is still running and data regularly updated.  </p>
+        <p> This plot displays 2.211 suisse agricultural websites (green) and their interlinkage. Explore this webscape to get an bubble-indipendent impression of the versatility of suisse agriculture. The crawler which generated the data is still running and data regularly updated. 
+            This is a demo. Currently, the graph performs imperfect on smartphones.</p>
         </div>
       </div> 
       <div className="graph-container">
@@ -19,7 +20,7 @@ function App() {
       <div className="info-container">
         <div className="description1">
           <p>
-            The greenish agricultural nodes are websites, where the home-domain conatains a keyword connected to agriculture (Landwirtschaft, agriculture, fattoria, etc.).
+            The greenish nodes are websites, where the home-domain contains a keyword connected to agriculture (Landwirtschaft, agriculture, fattoria, etc.).
              The node size depends on the wesites in-degree. That is, if a website is linked by a lot of other websites, the websites node is big. The edges represent links between websites.            
           </p>  
           <p>
@@ -39,8 +40,8 @@ function App() {
               <li>click on nodes to open url in a new tab</li>
               <li>Randomly pick an agricultural node and open in a new tab</li>
               <li>Render the the graph with ForceAtlas2 
-                (a technique that "turns strucutral proximities into visual proximities, 
-                facilitating the analysis and in particular the analysis of social networks") </li>
+                (a technique that <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679" title="Linktitle"> "turns strucutral proximities into visual proximities, 
+                facilitating the analysis and in particular the analysis of social networks"</a>)</li>
             </ul>      
         </div>
         <div className="description3">         
@@ -49,7 +50,7 @@ function App() {
             wish that I provide more documentation, please:</p>
              <ul>
                 <li>leave a reaction at my <a href="www.linkedin.com/in/moritz-maurer-agriculturalsociologist" title="Linktitle">linkedIn account</a></li>
-                <li>contact me via this email adress: agriculturalorganizationsintheweb[at]gmail.com</li> 
+                <li>or contact me via this email adress: agriculturalorganizationsintheweb[at]gmail.com</li> 
             </ul> 
             <p>
             This website was created by me, Moritz Maurer,

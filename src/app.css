@@ -82,3 +82,13 @@ h1{
     flex: 1 1 100%; /* Stack on top of each other on narrow screens */
   }
 }
+
+a {
+  color: #F58576; /* Change this to your desired color */
+  text-decoration: none; /* Optional: remove underline */
+}
+
+a:hover {
+  color: #ffffff; /* Change this to your desired hover color */
+  text-decoration: underline; /* Optional: add underline on hover */
+}
