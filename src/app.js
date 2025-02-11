@@ -7,10 +7,10 @@ function App() {
     <div className="App">
       <div className="header-container">
         <div className="header">
-          <h1>Swiss Agricultural Webscape</h1>
+          <h1>The Swiss Agricultural Webscape</h1>
         </div>
         <div className="descriptionheader1">
-        <p> This plot displays 2.211 Swiss agricultural websites (green) and their interlinkage. 
+        <p> This plot displays 2'211 Swiss agricultural websites (green) and their interlinkage. 
           Explore this webscape to get a bubble-indipendent impression of the versatility of Swiss agriculture. 
           The crawler that generated the data is still running and the data is regularly updated. 
             This is a demo. Currently, the graph performs imperfect on smartphones.</p>
