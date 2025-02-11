@@ -313,7 +313,6 @@ const ForceAtlas2Controls = ({filterRelevant, setFilterRelevant}) => {
 
 const DisplayGraph = () => {
   const [selectedNode, setSelectedNode] = useState(null);
-  const [focusNode, setFocusNode] = useState(null);
   const [filterRelevant, setFilterRelevant] = useState(true);
 
   useEffect(() => {
@@ -321,23 +320,23 @@ const DisplayGraph = () => {
   }, [filterRelevant]);
 
   return (
-    <div className="graph-container">
-      <SigmaContainer 
+    <div id="sigma-container" className="graph-container">
+      <SigmaContainer
         key={filterRelevant ? "filteredSigma" : "unfilteredSigma"}
-        className="my-sigma" 
-        settings={{ allowInvalidContainer: true, zIndex: false,         
-         }}>
+        id="sigma-container"
+        className="my-sigma"
+        settings={{ zIndex: false }}
+      >
         <LoadGraph filterRelevant={filterRelevant} />
         <GraphControls
           filterRelevant={filterRelevant}
-          key={filterRelevant ? "filtered" : "unfiltered"}
           selectedNode={selectedNode}
           setSelectedNode={setSelectedNode}
-          setFocusNode={setFocusNode}
         />
         <ForceAtlas2Controls 
           filterRelevant={filterRelevant} 
-          setFilterRelevant={setFilterRelevant} />
+          setFilterRelevant={setFilterRelevant}
+        />
       </SigmaContainer>
     </div>
   );
