@@ -299,7 +299,7 @@ const ForceAtlas2Controls = ({filterRelevant, setFilterRelevant}) => {
 
 
   return (
-    <ControlsContainer position="top-left">
+    <ControlsContainer position="bottom-left">
       <button onClick={startForceAtlas2}>Start</button>
       <button onClick={stopForceAtlas2}>Stop</button>
       <button onClick={reloadGraph}>Reload</button>

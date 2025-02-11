@@ -42,7 +42,7 @@ function App() {
               <li>Zoom in and out</li>
               <li>Search for nodes</li>
               <li>Click on nodes to open URL in a new tab</li>
-              <li>Randomly pick an agricultural node and open in a new tab</li>
+              <li>Randomly pick an agricultural website and open in a new tab</li>
               <li>Render the the graph with ForceAtlas2 
                 (a technique that <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679" title="Linktitle"> "turns strucutral proximities into visual proximities, 
                 facilitating the analysis and in particular the analysis of social networks"</a>)</li>
