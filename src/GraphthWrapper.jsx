@@ -41,13 +41,13 @@ export const LoadGraph = ({ filterRelevant }) => {
         // Set node sizes based on in-degree
         graph.forEachNode(node => {
           const inDegree = graph.inDegree(node);
-          graph.setNodeAttribute(node, "size", 2 + Math.min(inDegree * 0.25, 25));
+          graph.setNodeAttribute(node, "size", 1 + Math.min(inDegree * 0.10, 50));
         });
 
         // Set node colors and zIndex based on status
         graph.forEachNode(node => {
           const status = graph.getNodeAttribute(node, "status");
-          const color = status.includes("Relevant") ? "rgb(9, 255, 0)" : "rgba(218, 129, 129, 0.56)";
+          const color = status.includes("Relevant") ? "#A9F584" : "#F58576";
 
 
           graph.setNodeAttribute(node, "color", color);
@@ -58,7 +58,7 @@ export const LoadGraph = ({ filterRelevant }) => {
 
         // Set edge sizes and colors
         graph.forEachEdge(edge => {
-          const defaultEdgeColor = "rgba(4, 35, 60, 0.5)";
+          const defaultEdgeColor = "rgb(0, 43, 70, 0.5)";
           graph.setEdgeAttribute(edge, "size", 0.1);
           graph.setEdgeAttribute(edge, "color", defaultEdgeColor);
           graph.setEdgeAttribute(edge, "originalColor", defaultEdgeColor); // Store original edge color
@@ -79,7 +79,7 @@ export const LoadGraph = ({ filterRelevant }) => {
       });
   }, [loadGraph]);
 
-  sigma.getCamera().animatedZoom({ duration: 0, factor: 1.2 });
+  sigma.getCamera().animatedZoom({ duration: 0, factor: 1.5 });
 
   useEffect(() => {
     const file = filterRelevant ? "/graph_data_filtered.json" : "/graph_data.json";
@@ -97,7 +97,7 @@ const GraphControls = ({
  }) => {
   const sigma = useSigma();
   const graph = sigma.getGraph();
-  const previouslyHighlighted = useRef(null);
+
 
   // Filter function that only returns nodes existing in the current graph
   const searchInGraph = useCallback(
@@ -122,85 +122,83 @@ const GraphControls = ({
     [sigma]
   );
 
-  // Node *hover* highlighting
-  useEffect(() => {
-    const handleMouseEnter = (event) => {
-      const hoveredNode = event.node;
-
-      // Highlight hovered node
-      graph.setNodeAttribute(hoveredNode, "highlighted", true);
-
-      // Hide all non-neighbor nodes
-      const neighbors = graph.neighbors(hoveredNode);
+  const highlightNode = useCallback(
+    (nodeId) => {
+      const neighbors = graph.neighbors(nodeId);
       graph.forEachNode((node) => {
-        if (node !== hoveredNode && !neighbors.includes(node)) {
-          graph.setNodeAttribute(node, "color", "rgba(0,43,70,0.5)"); // Background color
+        if (node !== nodeId && !neighbors.includes(node)) {
+          graph.setNodeAttribute(node, "color", "rgb(0, 43, 70, 0.6)");
         }
       });
-
-      // Highlight edges that connect to hovered node; hide others
       graph.forEachEdge((edge) => {
         const [source, target] = graph.extremities(edge);
         if (
-          (source === hoveredNode && neighbors.includes(target)) ||
-          (target === hoveredNode && neighbors.includes(source))
+          (source === nodeId && neighbors.includes(target)) ||
+          (target === nodeId && neighbors.includes(source))
         ) {
           graph.setEdgeAttribute(edge, "color", "#ffffff");
         } else {
-          graph.setEdgeAttribute(edge, "color", "rgba(0,43,70,0.5)");
+          graph.setEdgeAttribute(edge, "color", "rgb(0, 43, 70, 0.6)");
         }
       });
+      // Mark the searched node as highlighted
+      graph.setNodeAttribute(nodeId, "color", "#ffffff");
+      graph.setNodeAttribute(nodeId, "highlighted", true);
+    },
+    [graph]
+  );
+
+  const unhighlightAll = useCallback(() => {
+    graph.forEachNode((node) => {
+      graph.setNodeAttribute(node, "highlighted", false);
+      const originalColor = graph.getNodeAttribute(node, "originalColor");
+      graph.setNodeAttribute(node, "color", originalColor);
+    });
+    graph.forEachEdge((edge) => {
+      const originalColor = graph.getEdgeAttribute(edge, "originalColor");
+      graph.setEdgeAttribute(edge, "color", originalColor);
+    });
+  }, [graph]);
+
+  // Hover event functions that now can refer to unhighlightAll & highlightNode
+  useEffect(() => {
+    const handleMouseEnter = (event) => {
+      if (!selectedNode) {
+        unhighlightAll();
+        highlightNode(event.node);
+      }
     };
 
-    const handleMouseLeave = (event) => {
-      // Clear highlight on every node and restore original color
-      graph.forEachNode((node) => {
-        graph.setNodeAttribute(node, "highlighted", false);
-        const originalColor = graph.getNodeAttribute(node, "originalColor");
-        graph.setNodeAttribute(node, "color", originalColor);
-      });
-      // Clear highlight on every edge and restore its original color
-      graph.forEachEdge((edge) => {
-        const originalColor = graph.getEdgeAttribute(edge, "originalColor");
-        graph.setEdgeAttribute(edge, "color", originalColor);
-      });
+    const handleMouseLeave = () => {
+      if (!selectedNode) {
+        unhighlightAll();
+      }
     };
-  
+
     sigma.on("enterNode", handleMouseEnter);
     sigma.on("leaveNode", handleMouseLeave);
-  
     return () => {
       sigma.off("enterNode", handleMouseEnter);
       sigma.off("leaveNode", handleMouseLeave);
     };
-  }, [sigma, graph]);
-  
+  }, [sigma, selectedNode, unhighlightAll, highlightNode]);
+
+  // onChange for search highlighting:
   const onChange = useCallback(
     (value) => {
-      // Un-highlight any previously highlighted node
-      if (previouslyHighlighted.current) {
-        sigma
-          .getGraph()
-          .setNodeAttribute(previouslyHighlighted.current, "highlighted", false);
-        previouslyHighlighted.current = null;
-      }
-
       if (value === null) {
         setSelectedNode(null);
+        unhighlightAll();
       } else if (value.type === "nodes") {
         setSelectedNode(value.id);
-        // Highlight the selected node
-        sigma
-          .getGraph()
-          .setNodeAttribute(value.id, "highlighted", true);
-        previouslyHighlighted.current = value.id;
-
-        // Re-center the camera on the selected node
-        const nodePos = sigma.getGraph().getNodeAttributes(value.id);
-        sigma.getCamera().animate(nodePos, { duration: 500 });
+        unhighlightAll();
+        highlightNode(value.id);
+        // Optionally center camera on that node:
+        // const nodePos = sigma.getGraph().getNodeAttributes(value.id);
+        // sigma.getCamera().animate(nodePos, { duration: 500 });
       }
     },
-    [setSelectedNode, sigma]
+    [setSelectedNode, sigma, unhighlightAll, highlightNode]
   );
 
   // Open node URL on direct node click
@@ -240,6 +238,7 @@ const GraphControls = ({
   );
 };
 
+
 const ForceAtlas2Controls = ({filterRelevant, setFilterRelevant}) => {
   const sigma = useSigma();
   const forceAtlas2Ref = useRef(null);
@@ -254,14 +253,14 @@ const ForceAtlas2Controls = ({filterRelevant, setFilterRelevant}) => {
     const graph = sigma.getGraph();
     forceAtlas2Ref.current = new FA2Layout(graph, {
       settings: {
-        slowDown: 1,
-        iterationsPerRender: 10, // Increase iterations per render for smoother animation
+        slowDown: 6,
+        iterationsPerRender: 15, // Increase iterations per render for smoother animation
         barnesHutOptimize: true, // Enable Barnes-Hut optimization
         barnesHutTheta: 0.5, // Theta parameter for Barnes-Hut optimization
         strongGravityMode: true, // Enable strong gravity mode
         gravity: 1, // Adjust gravity to control node spacing
         edgeWeightInfluence: 0, // Influence of edge weights on layout
-        scalingRatio: 3, // Adjust scaling ratio to control node spacing
+        scalingRatio: 60, // Adjust scaling ratio to control node spacing
         adjustSizes: true, // Adjust node sizes to avoid overlap
         outboundAttractionDistribution: true, // Distribute attraction forces evenly
       },
@@ -315,7 +314,7 @@ const ForceAtlas2Controls = ({filterRelevant, setFilterRelevant}) => {
 const DisplayGraph = () => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [focusNode, setFocusNode] = useState(null);
-  const [filterRelevant, setFilterRelevant] = useState(false);
+  const [filterRelevant, setFilterRelevant] = useState(true);
 
   useEffect(() => {
     setSelectedNode(null);
@@ -326,7 +325,7 @@ const DisplayGraph = () => {
       <SigmaContainer 
         key={filterRelevant ? "filteredSigma" : "unfilteredSigma"}
         className="my-sigma" 
-        settings={{ allowInvalidContainer: true,          
+        settings={{ allowInvalidContainer: true, zIndex: false,         
          }}>
         <LoadGraph filterRelevant={filterRelevant} />
         <GraphControls
