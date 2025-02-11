@@ -10,7 +10,7 @@ function App() {
           <h1>The Swiss Agricultural Webscape</h1>
         </div>
         <div className="descriptionheader1">
-        <p> This plot displays 2'211 Swiss agricultural websites (green) and their interlinkage. 
+        <p> This plot displays 2'211 Swiss agricultural websites (green) and their interlinkages. 
           Explore this webscape to get a bubble-indipendent impression of the versatility of Swiss agriculture. 
           The crawler that generated the data is still running and the data is regularly updated. 
             This is a demo. Currently, the graph performs imperfect on smartphones.</p>
@@ -31,7 +31,7 @@ function App() {
             If the home domain of the external website contained one of the agriculture keywords, crawling was continued.
             The crawler was designed to crawl gently (depth 1, sleep time between requests, respecting robots.txt).
             The graph is displayed using <a href="https://sim51.github.io/react-sigma/" title="Linktitle">React, Graphology, and Sigma.js.</a>
-            The code for the crawler and the graph is available in this github repository.
+            The code for the crawler and the graph is available in this <a href="https://github.com/AgrarMo/Agricultural-Organizations-in-the-Web" title="Linktitle">github repository.</a>
           </p>  
         </div>
         <div className="description2">
