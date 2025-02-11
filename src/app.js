@@ -7,11 +7,11 @@ function App() {
     <div className="App">
       <div className="header-container">
         <div className="header">
-          <h1>Swiss Agricultural Organizations in the Web</h1>
+          <h1>Swiss Agricultural Webscape</h1>
         </div>
         <div className="descriptionheader1">
         <p> This plot displays 2.211 Swiss agricultural websites (green) and their interlinkage. 
-          Explore this webscape to get an bubble-indipendent impression of the versatility of Swiss agriculture. 
+          Explore this webscape to get a bubble-indipendent impression of the versatility of Swiss agriculture. 
           The crawler that generated the data is still running and the data is regularly updated. 
             This is a demo. Currently, the graph performs imperfect on smartphones.</p>
         </div>
@@ -38,14 +38,14 @@ function App() {
           <p>
             The Graph has some interactive features. You can: </p>
             <ul>
-              <li>zoom in and out</li>
-              <li>search for nodes</li>
-              <li>click on nodes to open url in a new tab</li>
+              <li>Zoom in and out</li>
+              <li>Search for nodes</li>
+              <li>Click on nodes to open URL in a new tab</li>
               <li>Randomly pick an agricultural node and open in a new tab</li>
               <li>Render the the graph with ForceAtlas2 
                 (a technique that <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679" title="Linktitle"> "turns strucutral proximities into visual proximities, 
                 facilitating the analysis and in particular the analysis of social networks"</a>)</li>
-              <li> view as well non-agricultural websites, that were referenced by agricultural websites (the graph will render slowly on computers with limited memory)</li>
+              <li> view non-agricultural websites that were referenced by agricultural websites (the graph will render slowly on computers with limited memory)</li>
             </ul>      
         </div>
         <div className="description3">         
@@ -53,12 +53,12 @@ function App() {
             If you you are curious about this project, want to support its further development, or 
             wish that I provide more documentation, please:</p>
              <ul>
-                <li>leave a reaction at my <a href="https://linkedin.com/in/moritz-maurer-agriculturalsociologist" title="Linktitle">linkedIn account</a></li>
-                <li>or contact me via this email adress: agriculturalwebscapes[at]protonmail.com</li> 
+                <li>Leave a reaction at my <a href="https://linkedin.com/in/moritz-maurer-agriculturalsociologist" title="Linktitle">linkedIn account</a></li>
+                <li>Or contact me via this email adress: agriculturalwebscapes[at]protonmail.com</li> 
             </ul> 
             <p>
             This website was created by me, Moritz Maurer,
-             a suisse based agricultural sociologist. 
+             a Swiss based agricultural sociologist. 
              The data and the graph are for illustrative purposes only
               and may not be accurate. Use the information at your own risk.
           </p>
