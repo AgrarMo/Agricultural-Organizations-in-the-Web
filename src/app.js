@@ -28,7 +28,7 @@ function App() {
             from some chatbots and the sources the bots used). It was started on the website of a suisse agricultural organization and crawled for links leading to external websites. 
             If the home-domain of the external website's contained one of the agriculture keywords, crawling was continued. 
             The crawler was designed to crawl gently (depth 1, sleep time between requests, respecting robots.txt).    
-            The Graph is displayed with react, graphology and sigma.js.
+            The Graph is displayed with <a href="https://sim51.github.io/react-sigma/" title="Linktitle"> react, graphology and sigma.js.</a>
           </p>  
         </div>
         <div className="description2">
@@ -50,7 +50,7 @@ function App() {
             wish that I provide more documentation, please:</p>
              <ul>
                 <li>leave a reaction at my <a href="www.linkedin.com/in/moritz-maurer-agriculturalsociologist" title="Linktitle">linkedIn account</a></li>
-                <li>or contact me via this email adress: agriculturalorganizationsintheweb[at]gmail.com</li> 
+                <li>or contact me via this email adress: agriculturalwebscapes[at]protonmail.com</li> 
             </ul> 
             <p>
             This website was created by me, Moritz Maurer,
