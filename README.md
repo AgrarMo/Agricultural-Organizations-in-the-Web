@@ -13,7 +13,7 @@ The react based website runs a graphology sigma.js graphical display of the iden
 
 The current version of the project is specified to crawl and display the websites of suisse agricultural organizations. 
 
-!!! If you inted to adopt this project to another nation: Test intensively if the functions which are supposed to make it gentle propperly work: the crawler should be slow (sleep time) in order not to steel website's server capacities from actual users. The crawler does not go into depht. Important links to other websites shall be found, not all links. The crawler should ignora pictures, videos and pdfs. And the crawler should check robot.txt and ignore subsites which are not supposed to be crawled.
+!!! If you inted to adopt this project to analyse the webscape of another region/nationstate: Test intensively if the functions which are supposed to make it gentle propperly work: the crawler should be slow (sleep time) in order not to steel website's server capacities from actual users. The crawler does not go into depht. Important links to other websites shall be found, not all links. The crawler should ignora pictures, videos and pdfs. And the crawler should check robot.txt and ignore subsites which are not supposed to be crawled.
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ The website: Required packages for creating the website were installed locally v
 
 ### Executing program
 
-If you want to run the code for another nation: First: adopt keywords, and websites which are not supposed to be crawled (e.g. newspapers) in the Agrarorga.ipynb file. Then test the crawler intesnively and adopt the keyword list and the exclision list. Only then let it run in python. When the crawler has finished or is stopped intentionately, run the second cell of the ipynb file. Then install the sigma graphology and react requirements in terminal via npm. Run npm start to host the website locally. 
+If you want to run the crawler for comprehending another nations agricultural webscape: First: adopt keywords, the country specifc domain ending, and websites which are not supposed to be crawled (e.g. newspapers) in the Agrarorga.ipynb file. Then test the crawler intesnively and adopt the keyword list and the exclision list. Only then let it run in python. When the crawler has finished or is stopped intentionately, run the second cell of the ipynb file. Then install the sigma graphology and react requirements in terminal via npm. Run npm start to host the website locally. 
 
 
 ## Authors
