@@ -10,7 +10,7 @@ function App() {
           <h1>The Swiss Agricultural Webscape</h1>
         </div>
         <div className="descriptionheader1">
-        <p> This plot displays 2'211 Swiss agricultural websites (green) and their interlinkages. 
+        <p> This plot displays 2'571 Swiss agricultural websites (green) and their interlinkages. 
           Explore this webscape to get a bubble-indipendent impression of the versatility of Swiss agriculture. 
           Or use the search field to select a website and study what other websites refer to it. 
           The crawler that generated the data is still running and the data is regularly updated. 
@@ -40,7 +40,7 @@ function App() {
             The Graph has some interactive features. You can: </p>
             <ul>
               <li>Zoom in and out</li>
-              <li>Search for nodes</li>
+              <li>Search for nodes, select them and higlight links to other nodes</li>
               <li>Click on nodes to open URL in a new tab</li>
               <li>Randomly pick an agricultural website and open in a new tab</li>
               <li>Render the the graph with ForceAtlas2 
