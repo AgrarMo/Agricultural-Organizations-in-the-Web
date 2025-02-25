@@ -10,10 +10,10 @@ function App() {
           <h1>The Swiss Agricultural Webscape</h1>
         </div>
         <div className="descriptionheader1">
-        <p> This plot displays 3'067 Swiss agricultural websites (green) and their interlinkages. 
+        <p> This plot displays 5'792 Swiss agricultural websites (green) and their interlinkages. 
           Explore this webscape to get a bubble-indipendent impression of the versatility of Swiss agriculture. 
           Or use the search field to select a website and study what other websites refer to it. 
-          The crawler that generated the data is still running and the data is regularly updated. 
+          The crawler that generated the data has identified some non-agricultural websites as agricultural websites (approximately 3 out of 10). I am working on improving the crawler's accuracy.
             This is a demo. Currently, the graph performs imperfect on smartphones.</p>
         </div>
       </div> 
